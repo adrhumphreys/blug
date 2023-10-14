@@ -7,7 +7,9 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div>
-      <Intro subtitle="Developer of sorts">Kia Ora! I’m Adrian.</Intro>
+      <Intro subtitle="Developer of sorts">
+        Kia Ora! I&apos;m&nbsp;Adrian.
+      </Intro>
       <Container>
         <p className={styles.label}>Posts</p>
         <ul className={styles.posts}>
