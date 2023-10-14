@@ -1,0 +1,44 @@
+.container {
+  position: relative;
+
+  @media (min-width: 1024px) {
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+.lineOne {
+  display: none;
+  @media (min-width: 1024px) {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.lineTwo {
+  display: none;
+  @media (min-width: 1024px) {
+    display: block;
+    position: absolute;
+    bottom: 150px;
+    right: 0;
+  }
+}
+
+.footer {
+  background-color: var(--color-peachy-light);
+  margin-top: 30px;
+  padding: 70px 16px;
+  text-align: center;
+}
+
+.content {
+  margin-bottom: 0;
+}
+
+.link {
+  font-weight: 700;
+}
