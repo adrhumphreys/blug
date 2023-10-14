@@ -30,12 +30,6 @@ iframe {
   width: 100%;
 }
 
-li code,
-p code {
-  background-color: var(--color-peachy-light);
-  padding: 2px 5px;
-}
-
 blockquote {
   color: var(--color-forest-green);
   font-family: var(--font-noto);
@@ -64,8 +58,8 @@ blockquote {
 
 /* Code styles */
 pre {
-  background-color: #eee !important;
-  border-left: 5px solid #feadb9;
+  background-color: var(--color-peachy-light) !important;
+  border-left: 5px solid var(--color-peachy);
   padding: 15px;
 }
 /* Background */
