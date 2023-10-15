@@ -72,13 +72,11 @@ pre {
   background-color: var(--color-peachy-light) !important;
   border-left: 5px solid var(--color-peachy);
   padding: 15px;
-}
-/* Background */
-pre {
   overflow-x: scroll;
   margin: 0;
   scrollbar-width: none;
   word-break: normal;
+  font-size: 1rem;
 }
 
 @media (min-width: 1024px) {
