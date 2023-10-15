@@ -4,4 +4,109 @@ description: "Adding some flavour to the mix"
 title: "Vanilla extract for design systems"
 ---
 
-TODO: Make this post
+We'll be talking about the example [Tahua](https://github.com/adrhumphreys/tahua). This is a design system made with react, but you should be able to use it as insperation for any frontend technology.
+
+## Building
+
+The main `vite.config.ts` is for the build step, it's been set up to be as tree shakable as possible. This means that when we run the build each component will be its own file.
+We'll use the button as our example for the output:
+
+```js
+import "./../../src/styles/theme.css.ts.vanilla.css";
+import "./../../src/components/Button/Button.css.ts.vanilla.css";
+import { c as a } from "../../node_modules/@vanilla-extract/recipes/dist/createRuntimeFn-f8e161c6.esm.js";
+var c = a({
+  defaultClassName: "d6ckgi0",
+  variantClassNames: {
+    color: { neutral: "d6ckgi1", brand: "d6ckgi2", accent: "d6ckgi3" },
+    size: { small: "d6ckgi4", medium: "d6ckgi5", large: "d6ckgi6" },
+    rounded: { true: "d6ckgi7" },
+  },
+  defaultVariants: { color: "accent", size: "medium" },
+  compoundVariants: [[{ color: "neutral", size: "large" }, "d6ckgi8"]],
+});
+export { c as button };
+```
+
+The main call out here is that due to this being split some build tools won't be happy that we're importing CSS inside each component. For example with Next.js and the pages router you'll need to transpile the module. The app router, vite, etc will work just fine.
+
+You can remove the `preserveModules` config if you want the build to just output one file which both imports all the css and contains all the JS.
+
+We're using the `preserveDirectives` plugin so that when we add `"use client";` it stays inside the files (RSC is also one of the reasons to look at splitting your files)
+
+For global styles, since they are import dependant, we have a `styles.ts` file which imports the global styles. This should be loaded first in the consuming apps.
+
+## Storybook
+
+Storybook support is fairly simple, our build config is made for making a library so we need to create a `vite.config.ts` file which is using `@vanilla-extract/vite-plugin`. We then update the `main.ts` config to use our custom config.
+
+```ts
+framework: {
+  name: "@storybook/react-vite",
+  options: {
+    builder: {
+    viteConfigPath: ".storybook/vite.config.ts",
+  },
+},
+```
+
+## Testing
+
+For running tests we're using [vitest](https://vitejs.dev) which has been fantastic, we just need to create a vitest config like so:
+
+```ts
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vitest/config";
+
+export default defineConfig({
+  plugins: [react(), vanillaExtractPlugin()],
+  test: {
+    globals: true,
+    include: ["src/**/*.test.{ts,tsx}"],
+    watch: false,
+    environment: "jsdom",
+    setupFiles: "src/tests/setup.ts",
+  },
+});
+```
+
+The `setup.ts` is fairly standard too:
+
+```ts
+import { afterEach } from "vitest";
+import { cleanup } from "@testing-library/react";
+import "@testing-library/jest-dom/vitest";
+import "@vanilla-extract/css/disableRuntimeStyles";
+
+// runs a cleanup after each test case (e.g. clearing jsdom)
+afterEach(() => {
+  cleanup();
+});
+```
+
+## Using tokens outside the design system
+
+If you're using tokens/theme variables you may run into issues importing them into `.css.ts` files as there's no React runtime there. For that I'd recommend creating another export such as `@org/design-system/css`.
+
+## Handling framework specific components
+
+When using Next.js you're expected to use the `Link` component from `next/link` inplace of an `a` tag. For this we just have a `DesignSystemProvider` which gets passed a `Link` component and an `Image` component, but falls back on `a` and `img` when they aren't passed in.
+
+## Consuming
+
+For **Vite** you'll need to:
+
+1. Create a `styles.ts` file and update `index.html` to import it in the header
+2. Update `styles.ts` to import the global `styles.ts` export from the package.
+
+This is just to handle the import order so that global styles are imported first, then classes afterwards.
+
+For **Next.js** you'll need to
+
+- Update either the root `layout.tsx` or `_app.tsx` to include the global `styles.ts`
+- You might need to update your `next.config.js` to transpile the design system (e.g. if you get errors for importing css inside components)
+
+## Fin
+
+Hopefully this helped you get set up/understand more around making a desisn system with Vanilla Extract

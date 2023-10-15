@@ -56,6 +56,13 @@ blockquote {
   }
 }
 
+p code {
+  background-color: var(--color-peachy-light);
+  outline: 4px solid var(--color-peachy-light);
+  margin: 0 4px;
+  padding: 0 2px;
+}
+
 /* Code styles */
 pre {
   background-color: var(--color-peachy-light) !important;
