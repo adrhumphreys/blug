@@ -1,6 +1,9 @@
 .container {
   position: relative;
-  @media (min-width: 1024px) {
+}
+
+@media (min-width: 1024px) {
+  .container {
     padding-left: 40px;
     padding-right: 40px;
   }
@@ -28,13 +31,17 @@
   color: var(--color-forest-green);
   margin-bottom: 30px;
   padding: 50px 16px;
+}
 
-  @media (min-width: 1024px) {
+@media (min-width: 1024px) {
+  .intro {
     padding: 65px 80px 100px;
     margin-bottom: 73px;
   }
+}
 
-  @media (min-width: 1280px) {
+@media (min-width: 1280px) {
+  .intro {
     padding-left: 175px;
     padding-right: 175px;
   }
@@ -44,31 +51,37 @@
   position: absolute;
   bottom: -49px;
   left: 0;
+}
 
-  @media (min-width: 1024px) {
+@media (min-width: 1024px) {
+  .picture {
     bottom: -73px;
   }
 }
 
 .red {
   bottom: -35px;
+}
 
-  @media (min-width: 1024px) {
+@media (min-width: 1024px) {
+  .red {
     bottom: inherit;
     left: inherit;
     right: 60px;
     top: -60px;
   }
+}
 
-  @media (min-width: 1280px) {
+@media (min-width: 1280px) {
+  .red {
     top: -60px;
     left: 0;
     right: inherit;
   }
 }
 
-.noPlane {
-  @media (min-width: 1024px) {
+@media (min-width: 1024px) {
+  .noPlane {
     margin-bottom: 30px;
   }
 }

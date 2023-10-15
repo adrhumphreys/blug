@@ -1,7 +1,9 @@
 .container {
   position: relative;
+}
 
-  @media (min-width: 1024px) {
+@media (min-width: 1024px) {
+  .container {
     padding-bottom: 40px;
     padding-left: 40px;
     padding-right: 40px;
@@ -10,7 +12,10 @@
 
 .line {
   display: none;
-  @media (min-width: 1024px) {
+}
+
+@media (min-width: 1024px) {
+  .line {
     display: block;
     position: absolute;
     bottom: 0;

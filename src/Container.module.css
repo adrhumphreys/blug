@@ -2,8 +2,10 @@
   padding-left: 16px;
   padding-right: 16px;
   position: relative;
+}
 
-  @media (min-width: 1024px) {
+@media (min-width: 1024px) {
+  .container {
     max-width: 674px;
     margin-left: auto;
     margin-right: auto;
@@ -13,8 +15,10 @@
 .container img {
   height: auto;
   width: 100%;
+}
 
-  @media (min-width: 1024px) {
+@media (min-width: 1024px) {
+  .container img {
     margin-bottom: 10px;
     margin-top: 10px;
     position: relative;
