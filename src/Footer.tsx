@@ -1,19 +1,20 @@
 import type { FC } from "react";
 import Image from "next/image";
 import styles from "./Footer.module.css";
+import clsx from "clsx";
 
 export const Footer: FC = () => {
   return (
     <div className={styles.container}>
       <Image
-        className={styles.lineOne}
+        className={clsx(styles.line, styles.lineOne)}
         src="/footer-line-1.svg"
         alt=""
         width="231"
         height="194"
       />
       <Image
-        className={styles.lineTwo}
+        className={clsx(styles.line, styles.lineTwo)}
         src="/footer-line-2.svg"
         alt=""
         width="99"
