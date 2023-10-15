@@ -78,13 +78,13 @@ pre {
   scrollbar-width: none;
   word-break: normal;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
   @media (min-width: 1024px) {
     position: relative;
     width: 840px;
     left: -83px;
   }
+}
+
+pre::-webkit-scrollbar {
+  display: none;
 }
